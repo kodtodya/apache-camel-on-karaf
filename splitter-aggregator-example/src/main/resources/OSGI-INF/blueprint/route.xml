@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
+
+    <camelContext xmlns="http://camel.apache.org/schema/blueprint">
+        <routeBuilder ref="splitterRoute"/>
+    </camelContext>
+    <bean id="employeeProcessor" class="com.kodtodya.training.fuse.processors.EmployeeProcessor"/>
+    <bean id="employeeService" class="com.kodtodya.training.fuse.processors.EmployeeService"/>
+    <bean id="departmentEmployeeStrategy" class="com.kodtodya.training.fuse.strategy.DepartmentEmployeeStrategy"/>
+    <bean id="splitterRoute" class="com.kodtodya.training.fuse.routes.SplitterRoute"/>
+
+</blueprint>

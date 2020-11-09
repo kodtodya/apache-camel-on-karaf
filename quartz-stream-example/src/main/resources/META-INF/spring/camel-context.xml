@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Configures the Camel Context-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+    <camelContext xmlns="http://camel.apache.org/schema/spring">
+        <propertyPlaceholder id="properties" location="classpath:bundle.properties"/>
+        <routeBuilder ref="quartzToStreamRoute"/>
+        <routeBuilder ref="streamFileToLogger"/>
+    </camelContext>
+    <bean id="quartzToStreamRoute" class="com.kodtodya.training.fuse.routes.QuartzToStreamRoute"/>
+    <bean id="streamFileToLogger" class="com.kodtodya.training.fuse.routes.StreamFileToLogger"/>
+<!--
+    <bean id="bundle-properties" class="org.apache.camel.component.properties.PropertiesComponent">
+        <property name="location" value="classpath:bundle.properties"/>
+    </bean>-->
+
+</beans>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
+
+    <camelContext xmlns="http://camel.apache.org/schema/blueprint">
+        <!--<routeBuilder ref="ehcacheRoute"/>-->
+        <route id="_start">
+            <from id="timer1" uri="timer://foo?repeatCount=1"/>
+            <log id="_log1" message="Start ..."/>
+            <to id="_populateCache" uri="bean:myCacheMgr?method=populateCache"/>
+            <log id="_log2" message="Cache populated."/>
+            <log id="_log3" message="dumpCache ..."/>
+            <to id="_dumpCache" uri="bean:myCacheMgr?method=dumpCache"/>
+            <log id="_log4" message="dumpCache."/>
+        </route>
+    </camelContext>
+    <bean id="employeeProcessor" class="com.kodtodya.training.fuse.processors.EmployeeProcessor"/>
+    <bean id="ehcacheRoute" class="com.kodtodya.training.fuse.routes.EhcacheRoute"/>
+    <bean class="com.kodtodya.training.fuse.manager.MySimpleCacheManager"
+          destroy-method="shutdown" factory-method="getInstance" id="myCacheMgr"/>
+
+</blueprint>
