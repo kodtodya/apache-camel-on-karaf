@@ -1,6 +1,6 @@
-# splitter-aggregator-example
+# http-camel-example
 ## camel-blueprint-example
-### We are coveringbelow topics in this example:
+### We are covering below topics in this example:
 - osgi
 - blueprint
 - timer
