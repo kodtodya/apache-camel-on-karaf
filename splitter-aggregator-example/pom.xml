@@ -8,7 +8,7 @@
     <name>splitter-aggregator-example</name>
 
     <properties>
-        <camel.version>3.2.0</camel.version>
+        <camel.version>3.4.0</camel.version>
         <karaf.bom.version>4.3.0</karaf.bom.version>
         <log4j2-version>2.13.3</log4j2-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -63,10 +63,12 @@
         <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>osgi.core</artifactId>
+            <version>6.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>osgi.cmpn</artifactId>
+            <version>6.0.0</version>
         </dependency>
         <!-- logging -->
         <dependency>
