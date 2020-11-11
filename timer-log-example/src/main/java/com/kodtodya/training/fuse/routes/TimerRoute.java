@@ -12,6 +12,7 @@ public class TimerRoute extends RouteBuilder {
                 .to("vm:vmComponent").id("vm-component-producer");
 
         from("vm:vmComponent").id("vm-component-consumer")
+                .log("${body}")
                 .to("log:myLogger").id("logger-component-producer");
     }
 }
