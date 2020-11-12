@@ -59,6 +59,7 @@
                 <configuration>
                     <instructions>
                         <Export-Package>com.kodtodya.training.fuse.*</Export-Package>
+                        <Import-Package>com.kodtodya.training.fuse.*</Import-Package>
                     </instructions>
                 </configuration>
             </plugin>

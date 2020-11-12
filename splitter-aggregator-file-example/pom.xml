@@ -2,23 +2,33 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.kodtodya.training.fuse</groupId>
-    <artifactId>file2-component-example</artifactId>
+    <artifactId>splitter-aggregator-file-example</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
-    <name>file2-component-example</name>
+    <name>splitter-aggregator-file-example</name>
 
     <properties>
-        <camel.version>3.4.0</camel.version>
+        <camel.version>3.2.0</camel.version>
         <karaf.bom.version>4.3.0</karaf.bom.version>
+        <log4j2-version>2.13.3</log4j2-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!-- Add Camel BOM -->
             <dependency>
-                <groupId>org.apache.karaf</groupId>
-                <artifactId>karaf-bom</artifactId>
-                <version>${karaf.bom.version}</version>
+                <groupId>org.apache.camel</groupId>
+                <artifactId>camel-bom</artifactId>
+                <version>${camel.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Add Camel Karaf BOM -->
+            <dependency>
+                <groupId>org.apache.camel.karaf</groupId>
+                <artifactId>camel-karaf-bom</artifactId>
+                <version>${camel.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -27,9 +37,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-direct</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.apache.camel.karaf</groupId>
             <artifactId>camel-core-osgi</artifactId>
-            <version>${camel.version}</version>
         </dependency>
         <dependency>
             <groupId>org.osgi</groupId>
@@ -41,28 +54,32 @@
             <artifactId>osgi.cmpn</artifactId>
             <version>6.0.0</version>
         </dependency>
+        <!-- logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.30</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.6.4</version>
+        </dependency>
     </dependencies>
 
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <version>3.2.0</version>
-                <extensions>true</extensions> <!--add this line-->
+                <extensions>true</extensions>
                 <configuration>
                     <instructions>
                         <Export-Package>com.kodtodya.training.fuse.*</Export-Package>
-                        <Import-Package>com.kodtodya.training.fuse.*</Import-Package>
                     </instructions>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
 </project>

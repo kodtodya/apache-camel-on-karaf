@@ -1,6 +1,5 @@
 package com.kodtodya.training.fuse.routes;
 
-import org.apache.camel.PropertyInject;
 import org.apache.camel.builder.RouteBuilder;
 
 public class FileProducerRoute extends RouteBuilder{

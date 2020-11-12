@@ -3,6 +3,7 @@ package com.kodtodya.training.fuse.processors;
 import com.kodtodya.training.fuse.beans.Department;
 import com.kodtodya.training.fuse.beans.Employee;
 import org.apache.camel.Exchange;
+import org.apache.camel.Message;
 import org.apache.camel.Processor;
 
 import java.util.ArrayList;
@@ -15,11 +16,12 @@ public class EmployeeProcessor implements Processor {
         List<Employee> employees = new ArrayList<Employee>();
         employees.add(new Employee("1", "Avadhut", "Finance"));
         employees.add(new Employee("2", "Kodtodya", "IT"));
-        employees.add(new Employee("2", "Kodtodya1", "IT"));
+        employees.add(new Employee("3", "Kodtodya1", "IT"));
 
         Department dept = new Department();
         dept.setEmployees(employees);
 
-        exchange.getIn().setBody(dept);
+        Message message = exchange.getIn();
+        message.setBody(dept);
     }
 }

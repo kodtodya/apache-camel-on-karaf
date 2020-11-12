@@ -13,7 +13,8 @@ import java.util.List;
 public class DepartmentEmployeeStrategy implements AggregationStrategy {
 
     Logger logger = LoggerFactory.getLogger(DepartmentEmployeeStrategy.class);
-    
+
+    //  A->   Exchange(Message(data)) -> B
     public Exchange aggregate(Exchange oldEmployeeExchange, Exchange newEmployeeExchange) {
         
            if (oldEmployeeExchange == null) {
@@ -29,11 +30,11 @@ public class DepartmentEmployeeStrategy implements AggregationStrategy {
                
                newEmployeeExchange.getIn().setBody(department);
                
-                return newEmployeeExchange;
+               return newEmployeeExchange;
             }
            
             Department department = oldEmployeeExchange.getIn().getBody(Department.class);
-            Employee newEmployee= newEmployeeExchange.getIn().getBody(Employee.class);
+            Employee newEmployee = newEmployeeExchange.getIn().getBody(Employee.class);
 
             logger.info("Aggregate old employees: " + department);
             logger.info("Aggregate new department: " + newEmployee);
@@ -45,5 +46,4 @@ public class DepartmentEmployeeStrategy implements AggregationStrategy {
 
             return oldEmployeeExchange;
     }
-
 }
