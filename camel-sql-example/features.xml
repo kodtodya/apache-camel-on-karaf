@@ -1,0 +1,15 @@
+<features>
+    <repository>mvn:org.apache.camel.karaf/apache-camel/${camel.version}/xml/features</repository>
+
+    <feature name="camel-example-sql-blueprint" version="3.4.0">
+        <feature version="3.4.0">camel</feature>
+        <feature version="3.4.0">camel-blueprint</feature>
+        <feature version="3.4.0">camel-sql</feature>
+        <!--<bundle>mvn:org.apache.derby/derby/${derby-version}</bundle>-->
+        <bundle>mvn:org.postgresql/postgresql/42.2.12</bundle>
+        <bundle>mvn:org.apache.commons/commons-pool2/2.4.2</bundle>
+        <bundle>wrap:mvn:org.apache.commons/commons-dbcp2/2.5.0$overwrite=merge;DynamicImport-Package=*</bundle>
+        <bundle>mvn:org.apache.camel.example/camel-example-sql-blueprint/3.4.0</bundle>
+    </feature>
+
+</features>

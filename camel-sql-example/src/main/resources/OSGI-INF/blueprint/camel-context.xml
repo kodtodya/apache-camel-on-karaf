@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0"
+           xmlns:camel="http://camel.apache.org/schema/blueprint"
+           xsi:schemaLocation="
+             http://www.osgi.org/xmlns/blueprint/v1.0.0 https://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+
+    <!-- this is the JDBC data source which uses a Postgres database -->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="url" value="jdbc:postgresql://localhost:5432/postgres"/>
+        <property name="username" value="postgres"/>
+        <property name="password" value="postgres"/>
+    </bean>
+
+    <!-- bean which creates/destroys the database table for this example -->
+    <bean id="initDatabase" class="com.kodtodya.training.fuse.sql.DatabaseBean"
+          init-method="create" destroy-method="destroy">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- configure the Camel SQL component to use the JDBC data source -->
+    <bean id="sql" class="org.apache.camel.component.sql.SqlComponent">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- order bean is our business logic bean that creates new orders -->
+    <bean id="orderBean" class="com.kodtodya.training.fuse.sql.OrderBean"/>
+
+    <!-- here is Camel configured with a number of routes -->
+    <camelContext xmlns="http://camel.apache.org/schema/blueprint">
+
+        <!-- use Camel property placeholder loaded from the given file -->
+        <propertyPlaceholder id="placeholder" location="classpath:sql.properties"/>
+        <!-- route that generate new orders and insert them in the database -->
+        <route id="generateOrder-route">
+            <from id="generator-timer" uri="timer:foo?delay=1s&amp;period=10s"/>
+            <transform id="generate-order">
+                <method ref="orderBean" method="generateOrder"/>
+            </transform>
+            <to id="insert-order" uri="sql:{{sql.insertOrder}}"/>
+            <log id="log-insert" message="Inserted new order ${body.id}"/>
+        </route>
+
+        <!-- route that process the orders by picking up new rows from the database
+             and when done processing then update the row to mark it as processed -->
+        <route id="processOrder-route">
+            <from id="select-order" uri="sql:{{sql.selectUnprocessedOrders}}?consumer.onConsume={{sql.markOrder}}"/>
+            <transform id="transform-order">
+                <method ref="orderBean" method="rowToOrder"/>
+            </transform>
+            <to id="process-order" uri="bean:orderBean?method=processOrder"/>
+            <log id="log-processed-order" message="${body}"/>
+        </route>
+
+    </camelContext>
+</blueprint>
