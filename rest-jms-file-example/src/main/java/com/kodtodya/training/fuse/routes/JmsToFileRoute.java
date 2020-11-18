@@ -12,7 +12,7 @@ public class JmsToFileRoute extends RouteBuilder {
                 .to("log:exceptionLogger");
 
         // read messages from jms & send to file
-        from("jms:queue:fuse-jms-demo")
+        from("jms:queue:fuse-jms-demo?concurrentConsumers=5")
                 .to("file:/home/kodtodya/Downloads/_test?fileName=jms-to-file.txt&fileExist=Append");
     }
 }

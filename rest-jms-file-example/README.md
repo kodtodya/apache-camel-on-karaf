@@ -9,7 +9,7 @@
 - file producer
 - throttler
 - exception handling
-
+- concurrentConsumers
 Please build and follow instructions:
 
 ** first change the file producer location in `JmsToFileRoute` so that your file will be written to appropriate location.
