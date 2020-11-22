@@ -12,6 +12,7 @@ Please run below set of commands as per given sequence:
 ```
     feature:repo-add camel 3.4.0
     feature:install scr framework jaas aries-blueprint camel-blueprint camel-jackson camel-servlet camel-sql camel-swagger-java pax-jdbc-config pax-jdbc-pool-dbcp2 transaction pax-jdbc-postgresql spring-jdbc jdbc http camel-netty camel-netty-http
+    feature:install transaction-manager-narayana camel-spring spring-tx
     bundle:install -s mvn:org.apache.commons/commons-pool2/2.5.0
     bundle:install -s wrap:mvn:org.apache.commons/commons-dbcp2/2.8.0
     bundle:install -s wrap:mvn:org.checkerframework/checker-qual/3.7.1

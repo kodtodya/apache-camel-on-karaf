@@ -40,6 +40,13 @@ public class RestToDbRoute extends RouteBuilder {
                 .setHeader(Exchange.HTTP_RESPONSE_CODE, constant(200));
 
         from("direct:fetchFromEmployeesTable")
+                // Please read documentation for transaction here:
+                // https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/transaction/TransactionDefinition.html
+
+                // PROPAGATION_REQUIRED : Support a current transaction; create a new one if none exists.
+                .transacted("PROPAGATION_REQUIRED")
+                // set no. of threads as per requirement
+                .threads(5, 25,"postgres-data-fetch-thread")
                 .to("sql:{{sql.fetch.all.employees}}?consumer.onConsume={{sql.updateEmployee}}")
                 .to("bean:dataProcessor?method=tableRowToResponse")
                 .log("${body}")
