@@ -16,7 +16,8 @@ this repo contains apache camel examples that can be deployed on community versi
 ## Part-2:
 
 - rest-jms-file-example
-- encryption-decryption-example
+- camel-sql-example
 - kafka-camel-example
 - reactive-streams-example
-- camel-sql-example
+- encryption-decryption-example
+- camel-transformation-example
