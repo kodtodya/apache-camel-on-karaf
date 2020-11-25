@@ -90,3 +90,14 @@ In this ways, you can install required featurs to cluster
 ```
   cluster:feature-list default | grep camel
 ```
+
+# RESTART ENTIRE CLUSTER to avoid errors
+
+Use below commands for cluster operations:
+```
+  cluster:bundle-list default
+  cluster:feature-uninstall default camel-blueprint
+  cluster:bundle-install default mvn:com.kodtodya.training.fuse/timer-log-example/1.0-SNAPSHOT
+  cluster:bundle-list default
+  cluster:bundle-start default 140
+```
