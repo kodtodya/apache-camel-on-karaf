@@ -20,4 +20,6 @@ this repo contains apache camel examples that can be deployed on community versi
 - kafka-camel-example
 - reactive-streams-example
 - encryption-decryption-example
+- Performance tuning for camel & amq/messaging
 - camel-transformation-example
+- 
