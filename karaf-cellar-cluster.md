@@ -75,3 +75,18 @@ Sync the cluster explicitely:
 ```
 cluster:sync
 ```
+
+## Cellar groups
+```
+cluster:group-list
+cluster:feature-repo-list default
+cluster:feature-repo-add default camel 3.4.0
+cluster:feature-repo-add default hawtio
+cluster:feature-install default aries-blueprint camel-blueprint camel-quartz
+```
+In this ways, you can install required featurs to cluster
+
+# valdiate the installed features something like this 
+```
+cluster:feature-list default | grep camel
+```
