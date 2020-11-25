@@ -22,4 +22,4 @@ this repo contains apache camel examples that can be deployed on community versi
 - encryption-decryption-example
 - Performance tuning for camel & amq/messaging
 - camel-transformation-example
-- 
+- CLustering with cellar
