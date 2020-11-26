@@ -1,0 +1,5 @@
+HEADER|123456|10-10-2020|Y|3|200000|200000|CAD|10-10-2020|internal settlement|CRED|56463810|098765432|TYPE|Canada Interstate Bank|0|YES
+DETAIL|top|1|test-instrument|333|X1XTILS3|Tom Fleming|103, North Block, Euro Tower|977|515 Pine Street,Alder Flats, Alberta|67|32425353556463810|374268489903980808||0|11-10-2020||78|Y
+DETAIL|top|1|test-instrument|333|X1XTILS3|Tom Fleming|103, North Block, Euro Tower|977|515 Pine Street,Alder Flats, Alberta|67|32425353556463810|374268489903980808||0|11-10-2020||78|Y
+DETAIL|top|1|test-instrument|333|X1XTILS3|Tom Fleming|103, North Block, Euro Tower|977|515 Pine Street,Alder Flats, Alberta|67|32425353556463810|374268489903980808||0|11-10-2020||78|Y
+
