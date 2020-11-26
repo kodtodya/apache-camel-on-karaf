@@ -21,5 +21,7 @@ this repo contains apache camel examples that can be deployed on community versi
 - reactive-streams-example
 - encryption-decryption-example
 - Performance tuning for camel & amq/messaging
+- Clustering with cellar
 - camel-transformation-example
-- CLustering with cellar
+- camel-rest-junit-example
+- camel-file-junit-example
