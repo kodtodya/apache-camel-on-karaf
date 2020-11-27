@@ -31,3 +31,25 @@
                 .to("sql-stored:classpath:sql/myprocedure.sql")
                 .id("sql-stored-proc");
 ```
+
+### dynamic conditional statements along with exchange properties and headers
+
+```
+                from("jms:my-q").routeId("jms-reader-route")
+                //sent to db - asyn
+                // processing -> conditions
+                .setHeader("is-everything-ok", constant("true"))
+                .setProperty("is-everything-ok", constant("true"))
+                //processing
+                .to("")
+                //processing
+                .to("kafka:myKafkaComponent").id("direct-producer");
+
+        from("kafka:myKafkaComponent").routeId("jms-reader-route")
+                .choice()
+                .when(simple("${exchangeProperties.is-everything-ok} == 'true'"))
+                    .to("validator:classpath:xsd/my-pacs008.xsd")
+                .end()
+                .to("kafka:myKafkaComponent").id("direct-producer");
+
+```
